@@ -30,3 +30,26 @@ in error.vue use <a>tag instead of <nuxt-link> beacuse when go to this page,our 
 > 1. use object spread operation to transfer data to one object 
 > 2. use vue style guide to naming 
 > 3. $attrs and $listeners in high order components
+
+## handling data
+1. asyncData()
+   1. in Pages folder,nuxt excute on the server; 
+   2. return the data of the component. it can wait until the async method to return something.like sync 
+   3. data() excute in client can override asyncData's return
+   4. this: asyncData runs before the component actually created.
+   5. we need give the asyncData an idea of when were done,otherwise it will immediately return the finished page.
+      1. promise when resolved
+      2. callback when call callback you tell the asyncData that you have done
+   6. is not always run on server.when first fetch page from server(refresh or <a> click),then the app turns into spa.then asyncData will be run on the client;callback func first param is like node,if null means no error.but when have error it will route to the errorpage.
+   7. context:url params,query and redirect func etc.
+2. vuex
+   1. use function to create a store instead of an object,beacuse nodejs can call it when setup the store then return a new object,otherwise all uses will get the same instance.
+   2. it will be automatically by nuxt,and be injected into our components
+   3. init store on server
+   4. nuxtServerInit()
+      1. one time only on server
+      2. special action will be dispatched auto by nuxt 
+3. fetch
+   1. either runs in server or runs in client
+   2. para context like the asyncData
+   3. promise but don't return data

@@ -4,7 +4,7 @@
       <h1>Get the latest tech news</h1>
     </section>
     <section class="featured-posts">
-      <PostList/>
+      <PostList :posts="loadedPosts"/>
     </section>
   </div>
 </template>
@@ -14,6 +14,26 @@ import PostList from "@/components/Posts/PostList";
 export default {
   components: {
     PostList
+  },
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: "1",
+            title: "first Post",
+            previewText: "this is our first",
+            thumbnail: "http://placecorgi.com/400/400"
+          },
+          {
+            id: "2",
+            title: "first Post",
+            previewText: "this is our first",
+            thumbnail: "http://placecorgi.com/400/400"
+          }
+        ]
+      });
+    }, 1500);
   }
 };
 </script>
