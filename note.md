@@ -18,3 +18,15 @@ nuxt components has two more methods or prop compared to normal vue. they are 'v
 6. error.vue reserved name error page
 7. global styles,nuxt.config.js
 8. everytime reload the page,nuxt re-render the page.
+
+## project-pages routing view
+1. font.google.com 
+2. '~assets' in css: config by webpack
+3. official vue style guide, the component only use once should start with 'the'
+4. nuxt-link-active 
+5. error.vue 
+in error.vue use <a>tag instead of <nuxt-link> beacuse when go to this page,our js code crash ,then nuxt-link may not work,our app might be dead,so use a normal <a> reload the page.
+
+> 1. use object spread operation to transfer data to one object 
+> 2. use vue style guide to naming 
+> 3. $attrs and $listeners in high order components
