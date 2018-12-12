@@ -15,25 +15,10 @@ export default {
   components: {
     PostList
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPosts: [
-          {
-            id: "1",
-            title: "first Post",
-            previewText: "this is our first",
-            thumbnail: "http://placecorgi.com/400/400"
-          },
-          {
-            id: "2",
-            title: "first Post",
-            previewText: "this is our first",
-            thumbnail: "http://placecorgi.com/400/400"
-          }
-        ]
-      });
-    }, 1500);
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
 };
 </script>

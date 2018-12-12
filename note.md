@@ -35,7 +35,7 @@ in error.vue use <a>tag instead of <nuxt-link> beacuse when go to this page,our 
 1. asyncData()
    1. in Pages folder,nuxt excute on the server; 
    2. return the data of the component. it can wait until the async method to return something.like sync 
-   3. data() excute in client can override asyncData's return
+   3. data return by asyncData will be merged with data()
    4. this: asyncData runs before the component actually created.
    5. we need give the asyncData an idea of when were done,otherwise it will immediately return the finished page.
       1. promise when resolved
