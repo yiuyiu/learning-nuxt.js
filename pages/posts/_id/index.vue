@@ -17,21 +17,27 @@
   </div>
 </template>
 <script>
+import axios from "axios-https-proxy-fix";
 export default {
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: "2",
-          title: `first Post (Id:${context.route.params.id})`,
-          author: "xixi",
-          updateDate: new Date(),
-          content: "some dummy text which",
-          previewText: "this is our first",
-          thumbnail: "http://placecorgi.com/400/400"
+  asyncData(context) {
+    return axios
+      .get(
+        "https://nuxt-blog-fdaed.firebaseio.com/posts/" +
+          context.params.id +
+          ".json",
+        {
+          proxy: {
+            host: "127.0.0.1",
+            port: 1087
+          }
         }
-      });
-    }, 1000);
+      )
+      .then(res => {
+        return {
+          loadedPost: res.data
+        };
+      })
+      .catch(e => context.error(e));
   }
 };
 </script>

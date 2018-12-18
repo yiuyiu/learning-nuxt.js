@@ -42,6 +42,7 @@ in error.vue use <a>tag instead of <nuxt-link> beacuse when go to this page,our 
       2. callback when call callback you tell the asyncData that you have done
    6. is not always run on server.when first fetch page from server(refresh or <a> click),then the app turns into spa.then asyncData will be run on the client;callback func first param is like node,if null means no error.but when have error it will route to the errorpage.
    7. context:url params,query and redirect func etc.
+   8. when routing into some component with asyncData fetching data. when asyncData failed it will route into that component.
 2. vuex
    1. use function to create a store instead of an object,beacuse nodejs can call it when setup the store then return a new object,otherwise all uses will get the same instance.
    2. it will be automatically by nuxt,and be injected into our components
@@ -53,3 +54,22 @@ in error.vue use <a>tag instead of <nuxt-link> beacuse when go to this page,our 
    1. either runs in server or runs in client
    2. para context like the asyncData
    3. promise but don't return data
+
+## connect app to the backend
+1. nuxt run the code in it's 'shell',you can't excute server side code with certain limitation
+2. in nuxtServerInit,context.req have the same thing with express cause they use the same middleware.
+3. fetch and post data using firebase,url with '.json',
+4. when use proxy to fetch data from endpoint with https,we can use 'request' module. 
+reference
+1. https://stackoverflow.com/questions/17690803/node-js-getaddrinfo-enotfound
+2. https://github.com/axios/axios/issues/925
+3. https://github.com/axios/axios/pull/959
+```
+request({
+  url:"",
+  proxy:'http://127.0.0.1:1087'
+})
+```
+5. terminal proxy  http_proxy https_proxy 
+6. when update data,other page can see the change. can 1. use async data in all page 2. update store (more elegant)
+> 1. var b = {...obj1,id:'x'}

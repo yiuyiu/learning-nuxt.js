@@ -11,8 +11,13 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "axios-https-proxy-fix": "^0.17.1",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0"
+    "nodejs-websocket": "^1.7.2",
+    "nuxt": "^2.0.0",
+    "request": "^2.88.0",
+    "tunnel": "0.0.6"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

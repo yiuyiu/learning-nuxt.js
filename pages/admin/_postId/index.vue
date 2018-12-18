@@ -1,27 +1,45 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <admin-post-form :post="loadedPost"/>
+      <admin-post-form :post="loadedPost" @submit="onSubmitted"/>
     </section>
   </div>
 </template>
 
 <script>
 import AdminPostForm from "@/components/Admin/AdminPostForm";
+import axios from "axios-https-proxy-fix";
 export default {
   layout: "admin",
   components: {
     AdminPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: "yuyi",
-        title: "my awesome post",
-        content: "super amazing",
-        thumbnailLink: "http://placecorgi.com/400/400"
-      }
-    };
+  asyncData(context) {
+    return axios
+      .get(
+        "https://nuxt-blog-fdaed.firebaseio.com/posts/" +
+          context.params.postId +
+          ".json",
+        {
+          proxy: {
+            host: "127.0.0.1",
+            port: 1087
+          }
+        }
+      )
+      .then(res => {
+        return {
+          loadedPost: { ...res.data, id: context.params.postId }
+        };
+      })
+      .catch(e => context.error(e));
+  },
+  methods: {
+    onSubmitted(editedPost) {
+      this.$store
+        .dispatch("editPost", editedPost)
+        .then(() => this.$router.push("/admin"));
+    }
   }
 };
 </script>
