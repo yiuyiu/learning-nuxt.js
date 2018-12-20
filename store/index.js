@@ -20,7 +20,7 @@ const createStore = ()=>{
     },
     actions:{
       nuxtServerInit(vuexContext,context){
-        return axios.get('https://nuxt-blog-fdaed.firebaseio.com/posts.json',{
+        return axios.get(process.env.baseUrl+'/posts.json',{
           proxy:{
             host: '127.0.0.1',
             port: 1087,

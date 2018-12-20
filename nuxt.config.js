@@ -35,6 +35,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/core-components.js',
+    '~/plugins/date-filter.js'
   ],
 
   /*
@@ -53,5 +55,12 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+  env:{
+    baseUrl:process.env.BASE_URL||"https://nuxt-blog-fdaed.firebaseio.com"
+  },
+  transition:{
+    name:'fade',
+    mode:'out-in'
   }
 }

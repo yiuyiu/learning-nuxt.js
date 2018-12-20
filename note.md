@@ -73,3 +73,14 @@ request({
 5. terminal proxy  http_proxy https_proxy 
 6. when update data,other page can see the change. can 1. use async data in all page 2. update store (more elegant)
 > 1. var b = {...obj1,id:'x'}
+
+## config plugins modules
+1. head:component option can configurate doc's tilte,meta,link
+2. progress config in nuxt.config.js
+3. loadingIndicator in spa.
+4. in nuxt.config 'env' set enviroment variable. which can be access by process.env
+5. in nuxt.config 'generate' can change the way nuxt generate pages.
+6. in nuxt.confg 'rootDir';'router' config as vue-router as can config 'extendRoutes' which can add extra root besides pages.
+7. in nuxt.config 'srcDir' like middleware pages 
+8. in nuxt.config 'transition' transition when change route.
+9. plugins can register global components,global filters etc. any code you want to load before root vue instance mount.
