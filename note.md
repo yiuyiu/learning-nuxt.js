@@ -107,3 +107,9 @@ it runs either at the first load on the server,or excute on the client.
    2. middleware
    3. reload the page and get the token can use cookie(token storage on server);
    4. js-cookie set read cookie from js.
+
+## server side
+
+1. serverMiddleware connect your nuxt app to server side code,achieve database etc.
+2. use create-nuxt-app to create a new project with using a custom server framework like express
+   1. still use nuxt to pre-render the server
