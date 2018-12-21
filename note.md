@@ -113,3 +113,58 @@ it runs either at the first load on the server,or excute on the client.
 1. serverMiddleware connect your nuxt app to server side code,achieve database etc.
 2. use create-nuxt-app to create a new project with using a custom server framework like express
    1. still use nuxt to pre-render the server
+
+## deployment
+
+1. universal app
+   1. nodejs host required
+   2. npm run build npm run start
+   3. need all the folders and files not just .nuxt
+2. spa
+   1. static host required
+   2. change mode to 'spa' just npm run build
+   3. just need 'dist' fold
+   4. you shouldn't use nuxtServerInit again
+   5. always return index.html
+3. static
+
+   1. static host required
+   2. change mode to 'universal' npm run generate
+   3. it'll pre generate all folders
+   4. it can pre-render the detail pages too. like post/postId use 'generate' config
+
+   ```
+    generate:{
+      routes: function(){
+        return [
+          '/posts/123'
+        ]
+      }
+    }
+   ```
+
+   5. besides manually generate by some route, we can request a list of postId then return a array of route like upper
+
+   ```
+   generate: {
+    routes: function() {
+      return axios
+        .get("https://nuxt-blog.firebaseio.com/posts.json")
+        .then(res => {
+          const routes = [];
+          for (const key in res.data) {
+            routes.push({
+              route: "/posts/" + key,
+              payload: {postData: res.data[key]}
+            });
+          }
+          return routes;
+        });
+    }
+   }
+   ```
+
+   'payload' use upper which can be sent into that detail page hence it need not to request again, it can be access by context.payload in asyncData function
+   you just need to re-generate your app when content change it can be setup with a dynamically automate process;
+
+   6. it cannot access 'request' because we do not have server when generating and it also cannot access 'localStorage'
